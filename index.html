@@ -1,0 +1,882 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Zifana 🌈</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap');
+
+:root {
+  --purple: #7565e8;
+  --yellow: #ffcf56;
+  --pink: #ff9dbb;
+  --blue: #8edcff;
+  --green: #a7edc0;
+  --bg: #fffdf5;
+  --dark: #373653;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+  overflow-x: hidden;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+}
+
+.page {
+  display: none;
+  min-height: 100vh;
+  padding: 25px 18px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.page.active {
+  display: flex;
+  animation: appear .5s ease;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 10% 15%, #ffe5a8 0 8%, transparent 20%),
+    radial-gradient(circle at 90% 80%, #d8e8ff 0 10%, transparent 25%),
+    radial-gradient(circle at 85% 10%, #ffe0ed 0 7%, transparent 18%);
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 800px);
+  text-align: center;
+}
+
+.card {
+  padding: clamp(25px, 6vw, 55px);
+  background: #ffffffd9;
+  border: 2px solid white;
+  border-radius: 32px;
+  box-shadow: 0 20px 60px #7565e820;
+}
+
+h1, h2 {
+  font-family: 'Fredoka', sans-serif;
+  line-height: 1.15;
+  margin: 18px 0;
+}
+
+h1 {
+  font-size: clamp(3rem, 9vw, 6rem);
+}
+
+h2 {
+  font-size: clamp(2.2rem, 7vw, 4rem);
+}
+
+p {
+  line-height: 1.8;
+  color: #716d86;
+}
+
+.label {
+  font-size: .78rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 800;
+  color: var(--purple);
+}
+
+.emoji {
+  font-size: 3.5rem;
+}
+
+.primary, .secondary {
+  padding: 14px 23px;
+  border-radius: 50px;
+  font-weight: 800;
+  transition: .2s;
+}
+
+.primary {
+  background: var(--purple);
+  color: white;
+  box-shadow: 0 7px 0 #5142bd;
+}
+
+.secondary {
+  background: white;
+  color: var(--purple);
+  border: 2px solid #e4ddff;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-3px);
+}
+
+button:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+.rainbow {
+  display: inline-block;
+  background: linear-gradient(
+    90deg,
+    #ff6868,
+    #ffad48,
+    #f5d94e,
+    #58c98a,
+    #54bdf0,
+    #a28aff
+  );
+  color: transparent;
+  background-clip: text;
+}
+
+.progress {
+  height: 9px;
+  background: #eae5ff;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 0 auto 25px;
+  max-width: 350px;
+}
+
+.progress div {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #ff9dbb, #ffcf56, #8edcff);
+  transition: width .3s;
+}
+
+.game-card {
+  padding: 25px;
+  background: white;
+  border-radius: 28px;
+  box-shadow: 0 15px 45px #7565e815;
+  border: 2px solid #f1edff;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 390px;
+  margin: 24px auto;
+}
+
+.tile {
+  min-height: 90px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #e8e3ff, #dff6ff);
+  font-size: 2rem;
+  border: 2px solid white;
+  box-shadow: 0 5px 12px #7565e815;
+}
+
+.tile.found {
+  background: var(--green);
+}
+
+.tile.empty {
+  background: #fff0ca;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  padding: 9px 15px;
+  background: #f0edff;
+  color: var(--purple);
+  border-radius: 30px;
+  font-weight: 800;
+}
+
+.feedback {
+  min-height: 30px;
+  font-weight: 800;
+  color: var(--purple);
+}
+
+.memory-card {
+  min-height: 100px;
+  font-size: 2rem;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #dff6ff, #eee6ff);
+  border: 2px solid white;
+  box-shadow: 0 5px 12px #7565e815;
+}
+
+.memory-card.matched {
+  background: #dff8e8;
+}
+
+.memory-card.revealed {
+  background: #fff1c5;
+}
+
+.message {
+  text-align: left;
+  padding: 25px;
+  background: white;
+  border-radius: 24px;
+  border: 2px solid #ffe7a8;
+  line-height: 1.9;
+}
+
+.quote {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.4rem;
+  color: var(--purple);
+  line-height: 1.7;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin: 25px 0;
+}
+
+.photo {
+  padding: 8px 8px 14px;
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px #7565e820;
+  transform: rotate(-1deg);
+}
+
+.photo:nth-child(even) {
+  transform: rotate(1deg);
+}
+
+.photo img {
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.photo:first-child {
+  grid-column: span 2;
+}
+
+.photo:first-child img {
+  height: 380px;
+}
+
+.photo figcaption {
+  padding-top: 12px;
+  font-family: 'Fredoka', sans-serif;
+  color: var(--purple);
+}
+
+.confetti {
+  position: fixed;
+  top: -15px;
+  width: 10px;
+  height: 14px;
+  z-index: 99;
+  pointer-events: none;
+  animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(700deg);
+    opacity: .2;
+  }
+}
+
+@media (max-width: 480px) {
+  .tile, .memory-card {
+    min-height: 75px;
+  }
+
+  .photo img {
+    height: 190px;
+  }
+
+  .photo:first-child img {
+    height: 270px;
+  }
+
+  .game-card {
+    padding: 17px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1: WELCOME -->
+<section class="page active" id="welcome">
+  <div class="background"></div>
+
+  <div class="container card">
+    <div class="emoji">🌈 ⭐ 🎈</div>
+    <div class="label">A special birthday adventure</div>
+
+    <h1>Hi, <span class="rainbow">Zifana!</span></h1>
+
+    <p>
+      Ada petualangan kecil yang sudah disiapkan
+      khusus buat kamu. Ada game, hadiah, dan
+      kejutan spesial di akhir!
+    </p>
+
+    <p><strong>Ready? Let's go! 🚀</strong></p>
+
+    <div class="buttons">
+      <button class="primary" onclick="go('level1')">
+        START THE ADVENTURE ✨
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 2: LEVEL 1 -->
+<section class="page" id="level1">
+  <div class="background"></div>
+
+  <div class="container">
+    <div class="progress">
+      <div id="progress1"></div>
+    </div>
+
+    <div class="label">Level 1 · Star Hunt</div>
+    <h2>Find the Stars! ⭐</h2>
+
+    <p>
+      Ada 5 bintang tersembunyi di balik 9 kotak.
+      Buka satu per satu dan temukan semuanya!
+    </p>
+
+    <div class="game-card">
+      <div class="emoji">🎁 🧸 🌟</div>
+
+      <p class="stat">
+        Stars found: <span id="starScore">0</span>/5
+      </p>
+
+      <div class="grid" id="starGrid"></div>
+
+      <div class="feedback" id="starFeedback">
+        Pilih kotak untuk memulai!
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button class="secondary" onclick="go('welcome')">
+        Back
+      </button>
+
+      <button class="primary" id="level1Next"
+        disabled onclick="go('level2')">
+        UNLOCK LEVEL 2 →
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 3: LEVEL 2 -->
+<section class="page" id="level2">
+  <div class="background"></div>
+
+  <div class="container">
+    <div class="progress">
+      <div id="progress2"></div>
+    </div>
+
+    <div class="label">Level 2 · Memory Challenge</div>
+    <h2>Match the Magic! 🪄</h2>
+
+    <p>
+      Cari 3 pasangan gambar yang sama.
+      Ingat posisi kartu dan cocokkan semuanya!
+    </p>
+
+    <div class="game-card">
+      <div class="emoji">🦄 🌈 ⭐</div>
+
+      <div class="stats">
+        <div class="stat">
+          Pairs: <span id="pairScore">0</span>/3
+        </div>
+
+        <div class="stat">
+          Moves: <span id="moves">0</span>
+        </div>
+      </div>
+
+      <div class="grid" id="memoryGrid"></div>
+
+      <div class="feedback" id="memoryFeedback">
+        Let's test your memory!
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button class="secondary" onclick="go('level1')">
+        ← Level 1
+      </button>
+
+      <button class="primary" id="level2Next"
+        disabled onclick="go('birthday')">
+        REVEAL THE SURPRISE 🎉
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 4: BIRTHDAY -->
+<section class="page" id="birthday">
+  <div class="background"></div>
+
+  <div class="container card">
+    <div class="label">Today is your special day!</div>
+
+    <div class="emoji">🎂 🎉 🎈</div>
+
+    <h1>
+      Happy Birthday,<br>
+      <span class="rainbow">Zifana!</span>
+    </h1>
+
+    <p class="quote">
+      Sweet Fifteen · 15 Years of Wonderful Memories
+    </p>
+
+    <p>
+      Selamat ulang tahun yang ke-15!
+      Semoga hari ini penuh kebahagiaan,
+      tawa, hadiah, dan cerita yang menyenangkan.
+    </p>
+
+    <div class="buttons">
+      <button class="primary" onclick="go('wishes')">
+        READ YOUR BIRTHDAY WISHES 💌
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 5: WISHES -->
+<section class="page" id="wishes">
+  <div class="background"></div>
+
+  <div class="container">
+    <div class="label">A little message for you</div>
+
+    <h2>Dear Zifana ✨</h2>
+
+    <div class="message">
+      <p>
+        Selamat ulang tahun yang ke-15, Zifana!
+        Semoga di usia yang baru ini kamu tumbuh
+        menjadi pribadi yang semakin bahagia,
+        berani, baik hati, dan percaya diri.
+      </p>
+
+      <p>
+        Semoga sekolahmu lancar, cita-citamu semakin
+        dekat, dan kamu selalu dikelilingi keluarga
+        serta teman-teman yang menyayangimu.
+      </p>
+
+      <p>
+        Jangan takut mencoba hal baru. Tidak apa-apa
+        kalau sesekali melakukan kesalahan, karena
+        dari situlah kamu belajar dan berkembang.
+        Nikmati masa remajamu dan ciptakan banyak
+        kenangan yang menyenangkan.
+      </p>
+
+      <p>
+        Semoga Allah selalu memberikan kesehatan,
+        perlindungan, kebahagiaan, dan kemudahan
+        dalam setiap langkahmu. Aamiin. 🤍
+      </p>
+    </div>
+
+    <p class="quote">
+      "Tidak perlu menjadi sempurna untuk menjadi
+      hebat. Terus belajar, berani mencoba, dan
+      jadilah versi terbaik dari dirimu sendiri."
+    </p>
+
+    <div class="buttons">
+      <button class="secondary" onclick="go('birthday')">
+        Back
+      </button>
+
+      <button class="primary" onclick="go('gallery')">
+        SEE YOUR MEMORIES 📸
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 6: PHOTO GALLERY -->
+<section class="page" id="gallery">
+  <div class="background"></div>
+
+  <div class="container">
+    <div class="label">Little moments, lovely memories</div>
+
+    <h2>That's Our Zifana! 🌈</h2>
+
+    <p>
+      Empat foto, banyak cerita.
+      Semoga masih ada banyak kenangan indah
+      yang menunggu untuk dibuat!
+    </p>
+
+    <div class="gallery">
+      <figure class="photo">
+        <img src="assets/foto1.jpg" alt="Potret Zifana">
+        <figcaption>Simply being you ✨</figcaption>
+      </figure>
+
+      <figure class="photo">
+        <img src="assets/foto2.jpg" alt="Zifana di pantai">
+        <figcaption>Ocean days 🌊</figcaption>
+      </figure>
+
+      <figure class="photo">
+        <img src="assets/foto3.jpg" alt="Kenangan Zifana">
+        <figcaption>Keep smiling ☀️</figcaption>
+      </figure>
+
+      <figure class="photo">
+        <img src="assets/foto4.jpg" alt="Zifana menikmati pantai">
+        <figcaption>More memories 🌷</figcaption>
+      </figure>
+    </div>
+
+    <div class="card">
+      <div class="emoji">🎂 🥳 🌈</div>
+
+      <h2 class="rainbow">Keep Shining, Zifana!</h2>
+
+      <p>
+        Semoga usia 15 menjadi awal dari banyak
+        pengalaman seru, persahabatan yang hangat,
+        impian yang tercapai, dan kebahagiaan baru.
+      </p>
+
+      <p class="quote">
+        "Your story is just getting started.
+        Make it a wonderful one!"
+      </p>
+
+      <h2>Happy 15th Birthday! 🎉</h2>
+    </div>
+
+    <div class="buttons">
+      <button class="secondary" onclick="go('wishes')">
+        Read Wishes Again
+      </button>
+
+      <button class="primary" onclick="replay()">
+        PLAY AGAIN ↻
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+const pages = document.querySelectorAll('.page');
+
+let starsFound = 0;
+let level1Started = false;
+
+let memoryStarted = false;
+let firstCard = null;
+let lockBoard = false;
+let pairsFound = 0;
+let moves = 0;
+
+function go(id) {
+  pages.forEach(page => {
+    page.classList.toggle('active', page.id === id);
+  });
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  if (id === 'level1' && !level1Started) {
+    initLevel1();
+  }
+
+  if (id === 'level2' && !memoryStarted) {
+    initLevel2();
+  }
+
+  if (id === 'birthday') {
+    confetti(70);
+  }
+}
+
+/* LEVEL 1: FIND THE STARS */
+
+function initLevel1() {
+  level1Started = true;
+  starsFound = 0;
+
+  document.getElementById('starScore').textContent = 0;
+  document.getElementById('progress1').style.width = '0%';
+  document.getElementById('level1Next').disabled = true;
+  document.getElementById('starFeedback').textContent =
+    'Pilih kotak untuk memulai!';
+
+  const grid = document.getElementById('starGrid');
+  grid.innerHTML = '';
+
+  const items = Array.from({ length: 9 }, (_, i) => ({
+    star: i < 5
+  }));
+
+  items.sort(() => Math.random() - 0.5);
+
+  items.forEach(item => {
+    const button = document.createElement('button');
+
+    button.className = 'tile';
+    button.textContent = '🎁';
+
+    button.onclick = () => {
+      if (button.disabled) return;
+
+      button.disabled = true;
+
+      if (item.star) {
+        button.textContent = '⭐';
+        button.classList.add('found');
+
+        starsFound++;
+
+        document.getElementById('starScore').textContent =
+          starsFound;
+
+        document.getElementById('progress1').style.width =
+          (starsFound / 5 * 100) + '%';
+
+        document.getElementById('starFeedback').textContent =
+          [
+            'Satu bintang ditemukan! ✨',
+            'Nice! Ketemu lagi! 🌟',
+            'Kamu hebat! Lanjut!',
+            'Tinggal satu lagi!',
+            'Semua bintang berhasil ditemukan! 🎉'
+          ][starsFound - 1];
+
+      } else {
+        button.textContent = '🌼';
+        button.classList.add('empty');
+
+        document.getElementById('starFeedback').textContent =
+          'Belum ada bintang di sini. Coba lagi!';
+      }
+
+      if (starsFound === 5) {
+        document.getElementById('level1Next').disabled = false;
+        confetti(35);
+      }
+    };
+
+    grid.appendChild(button);
+  });
+}
+
+/* LEVEL 2: MEMORY MATCH */
+
+function initLevel2() {
+  memoryStarted = true;
+  firstCard = null;
+  lockBoard = false;
+  pairsFound = 0;
+  moves = 0;
+
+  document.getElementById('pairScore').textContent = 0;
+  document.getElementById('moves').textContent = 0;
+  document.getElementById('progress2').style.width = '0%';
+  document.getElementById('level2Next').disabled = true;
+
+  document.getElementById('memoryFeedback').textContent =
+    'Temukan semua pasangan gambar!';
+
+  const symbols = [
+    '🦄', '🌈', '⭐',
+    '🦄', '🌈', '⭐'
+  ];
+
+  for (let i = symbols.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [symbols[i], symbols[j]] = [symbols[j], symbols[i]];
+  }
+
+  const grid = document.getElementById('memoryGrid');
+  grid.innerHTML = '';
+
+  symbols.forEach(symbol => {
+    const button = document.createElement('button');
+
+    button.className = 'memory-card';
+    button.textContent = '❔';
+    button.dataset.symbol = symbol;
+
+    button.onclick = () => flipCard(button);
+
+    grid.appendChild(button);
+  });
+}
+
+function flipCard(card) {
+  if (
+    lockBoard ||
+    card.classList.contains('revealed') ||
+    card.classList.contains('matched')
+  ) {
+    return;
+  }
+
+  card.textContent = card.dataset.symbol;
+  card.classList.add('revealed');
+
+  if (!firstCard) {
+    firstCard = card;
+    return;
+  }
+
+  moves++;
+  document.getElementById('moves').textContent = moves;
+
+  if (firstCard.dataset.symbol === card.dataset.symbol) {
+    firstCard.classList.remove('revealed');
+    card.classList.remove('revealed');
+
+    firstCard.classList.add('matched');
+    card.classList.add('matched');
+
+    firstCard.disabled = true;
+    card.disabled = true;
+
+    firstCard = null;
+    pairsFound++;
+
+    document.getElementById('pairScore').textContent =
+      pairsFound;
+
+    document.getElementById('progress2').style.width =
+      (pairsFound / 3 * 100) + '%';
+
+    document.getElementById('memoryFeedback').textContent =
+      pairsFound === 3
+        ? 'SEMUA PASANGAN DITEMUKAN! Kamu keren! 🎉'
+        : 'Pasangan cocok! Cari yang lainnya! 🌈';
+
+    if (pairsFound === 3) {
+      document.getElementById('level2Next').disabled = false;
+      confetti(55);
+    }
+
+  } else {
+    lockBoard = true;
+
+    const previous = firstCard;
+    firstCard = null;
+
+    document.getElementById('memoryFeedback').textContent =
+      'Belum cocok! Ingat posisi gambarnya.';
+
+    setTimeout(() => {
+      previous.textContent = '❔';
+      card.textContent = '❔';
+
+      previous.classList.remove('revealed');
+      card.classList.remove('revealed');
+
+      lockBoard = false;
+    }, 800);
+  }
+}
+
+/* CONFETTI ANIMATION */
+
+function confetti(amount = 60) {
+  const colors = [
+    '#ff6868',
+    '#ffb703',
+    '#ffd166',
+    '#06d6a0',
+    '#4cc9f0',
+    '#8e7dff',
+    '#ff8fab'
+  ];
+
+  for (let i = 0; i < amount; i++) {
+    const piece = document.createElement('div');
+
+    piece.className = 'confetti';
+    piece.style.left = Math.random() * 100 + 'vw';
+    piece.style.background =
+      colors[Math.floor(Math.random() * colors.length)];
+
+    piece.style.animationDuration =
+      (2 + Math.random() * 3) + 's';
+
+    document.body.appendChild(piece);
+
+    setTimeout(() => piece.remove(), 5500);
+  }
+}
+
+/* REPLAY */
+
+function replay() {
+  level1Started = false;
+  memoryStarted = false;
+
+  go('welcome');
+}
+</script>
+
+</body>
+</html>
